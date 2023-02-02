@@ -9,7 +9,7 @@ import {useStateContext} from '../contexts/ContextProvider';
 
 
 const Sidebar = () => {
-	const {activeMenu, setActiveMenu, screenSize} = useStateContext();
+	const {activeMenu, setActiveMenu, screenSize, currentColor} = useStateContext();
 
 	const handleCloseSideBar = () => {
 		if( activeMenu && screenSize <= 900){
@@ -30,7 +30,9 @@ const Sidebar = () => {
 						onClick={handleCloseSideBar} 
 						className=" flex items-center gap-3 
 									ml-3 mt-4 text-xl font-extrabold 
-									tracking-tight dark:text-purple-400 text-purple-700 ">
+									tracking-tight dark:text-purple-400 "
+						style={{ color : currentColor}}			
+					>
 						<SiShopware /> <span>Purple Devs</span>
 					</Link>
 					<TooltipComponent content="Menu" position="BottomCenter">
@@ -50,6 +52,7 @@ const Sidebar = () => {
 									to={`/${link.name}`} 
 									key={link.name}
 									onClick={handleCloseSideBar}
+									style={({isActive}) =>({ backgroundColor : isActive ? currentColor : ''})}
 									className={({isActive}) => isActive ? activeLink : normalLink }
 								>
 									{link.icon}

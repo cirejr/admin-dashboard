@@ -9,11 +9,11 @@ import './App.css'
 import {useStateContext} from './contexts/ContextProvider'
 
 const App = () => {
-	const { activeMenu } = useStateContext();
+	const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode} = useStateContext();
 
 
   return (
-	<div>
+	<div className={currentMode === 'Dark' ? 'dark' : ''}>
 		<BrowserRouter>
 			<div className="flex relative dark:bg-main-dark">
 				<div className="fixed right-4 bottom-4" style={{zIndex: '1000'}}>
@@ -21,7 +21,8 @@ const App = () => {
 						<button 
 							type='button' 
 							className="text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray hover:rounded-md text-white "
-							style={{ background : "purple", borderRadius : '50%'}}
+							style={{ background :currentColor, borderRadius : '50%'}}
+							onClick={() => setThemeSettings(true)}
 						>
 							<FiSettings />
 						</button>	
@@ -37,13 +38,15 @@ const App = () => {
 					</div>
 				)}
 				<div className={
-					`dark:bg-main bg-main min-h-screen w-full ${ activeMenu ? 'md:ml-72' : 'flex-2'}`
+					`dark:bg-main-dark bg-main min-h-screen w-full ${ activeMenu ? 'md:ml-72' : 'flex-2'}`
 				}>
 					<div className="fixed md:static bg-main dark:bg-main-dark navbar w-full ">
 						<Navbar />
 					</div>
 
 					<div>
+						{themeSettings && <ThemeSettings />}
+
 						<Routes>
 							{/* Dashboard */}
 							<Route path='/' element={<Dashboard />} />
