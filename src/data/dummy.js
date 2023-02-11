@@ -533,7 +533,7 @@ export const links = [
       {
         name: 'bar',
         icon: <AiOutlineBarChart />,
-      },
+      },/*
       {
         name: 'pie',
         icon: <FiPieChart />,
@@ -553,7 +553,7 @@ export const links = [
       {
         name: 'stacked',
         icon: <AiOutlineBarChart />,
-      },
+      },*/
     ],
   },
 ];
